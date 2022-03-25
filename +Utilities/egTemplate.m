@@ -4,7 +4,8 @@ function s = egTemplate(varargin)
 %
 %Usage: y = egTemplate({A}); 
 %
-%Description: Returns a simple model electrogram waveform of length 5. 
+%Description: Returns a simple model electrogram waveform of length 5. Intended for use as a matched filter
+%             in event detection. 
 %
 %Inputs: A - optional. Amplitude of waveform pulse. Default is 1.
 %        

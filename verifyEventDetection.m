@@ -20,6 +20,8 @@ fs = 1000;
 fpass = [70 500];  % Nyquist is at 500 Hz. We want to keep as much high end as possible to keep event peaks sharp.
 peakThreshold = 0.001;
 minPeakDistance = 0.002*fs;
+highConfidenceThreshold = 0.9;
+lowConfidenceThreshold = 0.5;
 warning('off')
 
 % Import data.
@@ -83,9 +85,9 @@ for i = 1:size(s2,2)
             qualityIndex = r(1,2);
         end
         
-        if qualityIndex >0.9  %sds could add to hardcode / parameterize.
+        if qualityIndex > highConfidenceThreshold 
             ryg = 'g';
-        elseif qualityIndex <0.5
+        elseif qualityIndex < lowConfidenceThreshold
             ryg = 'r';
         else
             ryg = 'b';
