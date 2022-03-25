@@ -80,8 +80,11 @@ robust and result in clean identification of these types of events.
 
 ![Figure 1.](Images/Figure1.png?raw=true)
 
+**Here is a video of the array sensor responses over time...**
 
-   
+https://user-images.githubusercontent.com/97293473/160130707-1f125a6d-5116-414b-b431-b9b74b4cc3ea.mp4
+
+
 
 
 
