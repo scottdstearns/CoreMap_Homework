@@ -81,6 +81,11 @@ robust and result in clean identification of these types of events.
 ![Figure 1.](Images/Figure1.png?raw=true)
 
 **Here is a video of the array sensor responses over time...**
+To get the most out of the video, it is best to open the Images/Video02.mp4 outside of the GitHub or MATLAB environments. For example,
+QuickTimePlayer (on the Mac) allows the viewer to step forward and backward through frames using the right and left arrow keys. This 
+is interesting in that individual events appear to arrive and move relative to the array geometry. For example, if the array is stationary, 
+then the events appear to be propagating. Look for example, at time steps 0.561 through 0.564. Events appear in the southwest and appear
+to move relative to the array northward. Or maybe it's star gazing and random... 
 
 https://user-images.githubusercontent.com/97293473/160130707-1f125a6d-5116-414b-b431-b9b74b4cc3ea.mp4
 
