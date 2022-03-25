@@ -78,7 +78,7 @@ robust and result in clean identification of these types of events.
 
 ...coming soon. 
 
-![Figure 1.]('Images/Figure1.png?raw=true)
+![Figure 1.](Images/Figure1.png?raw=true)
 
 
    
