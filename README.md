@@ -76,7 +76,7 @@ robust and result in clean identification of these types of events.
 
 ### Part II: WAVEFORM DESCRIPTION
 
-...coming soon. 
+The following figures display some of the noise or interference in the signals. 
 
 ![Figure 1.](Images/Figure1.png?raw=true)
 
