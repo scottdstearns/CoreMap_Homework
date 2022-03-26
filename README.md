@@ -7,11 +7,30 @@ This repository is to provide documentation of the CoreMap DataScientist Candida
 #### CoreMap_Homework
 Main scripts run from this directory.
 
-**verifyEventDetection.m**  This script displays the signals, candidate events and their confidence levels and the zero crossings for
-events determined to be genuine. 
+**EventDetector.m**  This script runs the detection and event qualification algorithms and outputs the results to a .csv file:
+EventDetectionOutputs.csv. The file contains the results for all High or Indeterminant level candidate events.
+
+**verifyEventDetection.m**  This script displays the signals, candidate events and their confidence levels for
+candidate events. It does not output the results.
+
+**validateEventDetection.m** This script reads the EventDetectionOutputs.csv file, plots the clean signals and displays the event times
+graphically with a vertical bar.  
+
+**StackplotSubarry.m** This scripts allow the user to select a row or column of the subarray and displays a stackplot of the signals
+in that subarray. This can be used to look for patterns in the arrivals of events across neighboring elements of the array. This is
+a good candidate for refactoring as a helper function to include with the +Utilities folder. 
+
+**VisualizeInTime.m** This script displays and optionally records a video of the array response shown over time. This video shows
+8 distict bursts or waves of activity across the array.
+
+**PreprocessArrayData.m** This script take the original data, cleans the signals and saves them in ArraySignals.mat. This eliminates
+the need to reprocess the signals helps ensure the results are consistent as the algorithm is being developed. 
+
 
 #### Utilities 
-Mission-specific utilities for scripts that provide solutions to the Homework deliverables.
+Mission-specific utilities for scripts that provide solutions to the Homework deliverables. 
+
+**NOTE:** Enter: `> import Utilities.*` from the prompt if you want to call these functions from the Command Window. 
 
 To get help enter: `> help Utilities` at the prompt for detailed help. Or help on any of these functions. 
 
@@ -41,7 +60,18 @@ The wavelet and candidate event waveform were crosscorrelated and the resulting 
 assessment of the confidence that the event is genuine. 
 
 The confidence indices generally fell into three ranges: >0.9 , 0.5-0.9, and <0.5. These were qualitatively color coded as green, blue
-and red respectively in the **verifyEventDetection.m** script. This is the main script for the event detection part of the homework. 
+and red respectively in the **verifyEventDetection.m** script. This was the main script for developing the event detection method. The
+EventDetector.m script is the main script to implement the method and record the results.  
+
+**NOTES:**
+* In some cases, some asymmetry in the candidate waveform will shift the detection time away from the time of the third sample. For 
+genuine candidates that are symmetric around zero this shift is zero. This is due to the linear interpolation that is used to determine
+the event time, rather than simply taking the time of the third sample time. 
+
+![Figure 0.](Images/AsymEvent.png?raw=true)
+
+* Indeterminant events (see below) have a different morphology and are included in the list of detected events, although their confidence
+levels are lower than the genuine events. For these, the time of the peak absolute value is used for the event time. 
 
 #### Description of Key Parameters
 
@@ -91,7 +121,7 @@ event detection algorithm.
 ![Figure 2.](Images/NoiseFigure2.png?raw=true)
 
 
-Here we see the signal after the complete detection process. Interfering noise has been sufficiently attenuated. The color coding of
+**Here we see the signal after the complete detection process.** Interfering noise has been sufficiently attenuated. The color coding of
 event detections described above is displayed. Note the event detections due to the ringing at the edges of the signal are rejected by
 the matched filter qualification step. Also note the blue event. This is interesting and represents a distinct morphology that appears
 in all the signals. Although they do not correlate as well with the wavelet template compared to the green, fully qualified as 
@@ -103,18 +133,68 @@ Wonder if these are physiologically relevant?
 ![Figure 3.](Images/Figure1.png?raw=true)
 
 
-### Part III: EVENT PATTERNS - in progress. 
+### Part III: EVENT PATTERNS 
+
+**Here are stack plots of subarrays.** One displays the signals in a vertical subarray and the other in a horizontal subarray. 
+It is possible to find possible patterns in the events. For example in Column 2, Rows 5 and 6. From about t=0.25 to t=0.375, there 
+appears to be a tiplet of arrivals: one genuine followed by an 'indeterminant' and genuine that are more closely space. This triplet 
+appears on Row 6, but delayed by about 90-100 ms, and the 'indeterminant' event is inverted on Row 6. When inspecting the neighbors of
+Column 2 on the Row 6 stack plot, the triple does not appear in Columns 1 or 3. 
+
+Okay.. Visual inspection like this may yeild similar observances, but in general the events appear fairly randomly (Poisson) distributed 
+both temporally and spatially when visualizing the entire subarray. And, these observations are not altering the degree of confidence 
+that the events are genuine. 
+
+![Figure 4.](Images/Column2.png?raw=true)  ![Figure 5.](Images/Row6.png?raw=true)
+
 
 **Here is a video of the array sensor responses over time...**
-To get the most out of the video, it is best to open the Images/Video02.mp4 outside of the GitHub or MATLAB environments. For example,
+The video will play in the GitHub repo README for the project. To get the most out of the video, it is best to open the Images/Video02.mp4 outside of the GitHub or MATLAB environments. For example,
 QuickTimePlayer (on the Mac) allows the viewer to step forward and backward through frames using the right and left arrow keys. This 
 is interesting in that individual events appear to arrive and move relative to the array geometry. For example, if the array is stationary, 
 then the events appear to be propagating. Look for example, at time steps 0.561 through 0.564. Events appear in the southwest and appear
-to move relative to the array northward. Or maybe it's star gazing and random... 
+to move relative to the array northward. 
+
+The video shows (at least) 8 distinct bursts or waves of activity across the array. The activity bursts last about 10 ms and are separated
+by longer periods of quiet or individual events that are random (Poisson) arrivals in both time and space. This activity is difficult
+to identify in looking at stack plots of the subarray signals. However, they jump out in the video visualization. This could be a feature
+for 'ignoring' random events even with they are locally highly correlated with the wavelet template. 
+
+To determine if these observations are physiological or artifacts of the study, a time-space processing approach that is more advanced
+than what is presented here may be helpful. For example, beamforming may be useful to focus locally on near-field signals and reject
+far-field events that are correlated but not of interest. And, more advanced beamformers can steer nulls at interferers - improving
+detection and tracking. Also, although the spatial sampling is limited for this array, it may be useful to look at 2D Fourier transforms
+in temporal and spatial frequencies (wavenumber), (t, k) space. 
 
 https://user-images.githubusercontent.com/97293473/160130707-1f125a6d-5116-414b-b431-b9b74b4cc3ea.mp4
 
 
+### Part IV: MACHINE LEARNING
 
+**What features would be useful?**
+For the detection problem, we could imagine features that provide local information about the events, as well as the relationship of
+the event to other events in the measurements. For example, are the features extracted from an event that is part of a cluster in time
+or spatially on the array. Local features might include correlation coefficient with a wavelet template, amplitude, symmetry, rise time,
+deflection direction, and overall duration. Also, we saw the t-f spectrogram of the 'indeterminants' were characteristic and distinct 
+from the 'genuine' events. 
+
+For non-local features, we would want to have a measure of whether the events are part of a burst in time or spatially. Intermittent
+random events that occur between bursts of activity across the array might be considered false positives. 
+ 
+**What ML methods would be useful?** 
+This is the realm of classification as opposed to regression. Since we are working with a labeled data set, supervised learning would
+be used. Support Vector Machines (SVM) tend to have trouble with very large data sets and the basic implementation is for binary 
+classification problems and not multiclass problems, and do not provide a probalistic output or confidence level. Similarly, nearest
+neighbor methods like kNN may have trouble with large data sets. Decision trees tend to have problems generalizing and so validation
+may be a problem. Other methods are worth looking at. For example Naive Bayes classifiers work well with low dimensionality feature
+vectors (fewer features), and will provide multiclass probabilities. 
+
+Artificial Neural Networks and Deep Learning methods are good especially for multiclass problems and in cases like
+this where there is a large training set. Also, these can be computationally very fast once trained and will provide a score or 
+confidence level to rank the resulting outputs. 
+
+**Benefits relative to classical signal processing techniques?**
+I think both should work together. Preprocessing, normalization, PCA, correlations, transforms, and so on are all based on traditional
+signal processing and provide critical improvements in the performance of classifiers in general. 
 
 

@@ -4,6 +4,9 @@
 % is calculated and used to visualize which event detections have high (green), intermediate (blue)
 % or low (red) confidence. 
 %
+% The script also finds the event zero crossings and produces an output file with the results required
+% for the homework PART I. 
+%
 % To run the script from the editor using the Run icon on the EDITOR toolbar. The script cycles 
 % through the signals and a break is set after each display. Click the Continue button on the EDITOR toolbar
 % to see the next signal. 
@@ -12,6 +15,7 @@
 % Calls to: getSignals, egTemplate, signal processing toolbox
 
 clear
+clf
 import Utilities.*
 
 % Initializations and hard code.

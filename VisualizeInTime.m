@@ -1,7 +1,7 @@
 %VisualizeInTime
 
 % Initializations
-captureFlag = true;
+captureFlag = false;
 
 % Load the preprocessed signals
 load ArraySignals
