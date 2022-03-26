@@ -78,7 +78,32 @@ robust and result in clean identification of these types of events.
 
 The following figures display some of the noise or interference in the signals. 
 
-![Figure 1.](Images/Figure1.png?raw=true)
+Here we can see a significant DC component and narrowband interferent at about 50 Hz and a lower level of narrowband noise below 20 Hz.
+The signals appear to be bandlimited near the Nyquist frequency indicating aliasing from out of band energy is sufficiently attenuated.  
+
+![Figure 1.](Images/NoiseFigure1.png?raw=true)
+
+To preprocess the signals, the mean was removed and the demeaned signal was highpass filtered with fc = 70 Hz. This provided a signal that
+was clean enough for the event detection algorithm. Note, demeaning the signal before filtering reduced the ringing at the edges of the 
+signal, the residuals of which are seen here. This edge effect of the filtering in the time domain leads to some false positives in the
+event detection algorithm. 
+
+![Figure 2.](Images/NoiseFigure2.png?raw=true)
+
+
+Here we see the signal after the complete detection process. Interfering noise has been sufficiently attenuated. The color coding of
+event detections described above is displayed. Note the event detections due to the ringing at the edges of the signal are rejected by
+the matched filter qualification step. Also note the blue event. This is interesting and represents a distinct morphology that appears
+in all the signals. Although they do not correlate as well with the wavelet template compared to the green, fully qualified as 
+genuine events, they do have a strong correlation around 0.80 which is distictly higher than the clearly non-genuine red events. Also, 
+these intermediate 'indeterminant' events have a clearly distinctive pattern that is clear in the spectrograms. 
+Wonder if these are physiologically relevant?
+
+
+![Figure 3.](Images/Figure1.png?raw=true)
+
+
+### Part III: EVENT PATTERNS - in progress. 
 
 **Here is a video of the array sensor responses over time...**
 To get the most out of the video, it is best to open the Images/Video02.mp4 outside of the GitHub or MATLAB environments. For example,
