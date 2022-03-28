@@ -164,7 +164,7 @@ To determine if these observations are physiological or artifacts of the study, 
 than what is presented here may be helpful. For example, beamforming may be useful to focus locally on near-field signals and reject
 far-field events that are correlated but not of interest. And, more advanced beamformers can steer nulls at interferers - improving
 detection and tracking. Also, although the spatial sampling is limited for this array, it may be useful to look at 2D Fourier transforms
-in temporal and spatial frequencies (wavenumber), (t, k) space. 
+in temporal and spatial frequencies (wavenumber), (w, k) space. 
 
 https://user-images.githubusercontent.com/97293473/160130707-1f125a6d-5116-414b-b431-b9b74b4cc3ea.mp4
 
