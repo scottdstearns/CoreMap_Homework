@@ -158,7 +158,7 @@ to move relative to the array northward.
 The video shows (at least) 8 distinct bursts or waves of activity across the array. The activity bursts last about 10 ms and are separated
 by longer periods of quiet or individual events that are random (Poisson) arrivals in both time and space. This activity is difficult
 to identify in looking at stack plots of the subarray signals. However, they jump out in the video visualization. This could be a feature
-for 'ignoring' random events even with they are locally highly correlated with the wavelet template. 
+for 'ignoring' random events even when they are locally highly correlated with the wavelet template. 
 
 To determine if these observations are physiological or artifacts of the study, a time-space processing approach that is more advanced
 than what is presented here may be helpful. For example, beamforming may be useful to focus locally on near-field signals and reject
