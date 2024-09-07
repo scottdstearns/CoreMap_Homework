@@ -1,6 +1,6 @@
 # CoreMap Data Scientist Candidate Homework Problem by Scott Stearns
 
-This repository is to provide documentation of the CoreMap DataScientist Candidate Homework. See CoreMap Data Scientist Problem.pdf for a description of the challenge. See FinalReportPresentation.pptx for the slide deck presented to the hiring team. 
+This repository is to provide documentation of the CoreMap DataScientist Candidate Homework. See CoreMap Data Scientist Problem.pdf for a description of the challenge. See FinalReportPresentation.pptx for the slide deck presented to the hiring team. I spent approximately 14 hours doing this work and was not ultimately offered a position... but it was interesting and fun. 
 
 ### FOLDERS
 
